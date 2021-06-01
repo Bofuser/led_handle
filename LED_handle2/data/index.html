@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+	<title>LED_handle2</title>
+</head>
+
+<body>
+<center>
+<div id="demo">
+<h1>以下按钮可控制ESP8266开发板引脚</h1>
+ <br>
+  <button type="button" onclick="sendData(1)">点亮 LED</button>
+  <button type="button" onclick="sendData(0)">关闭 LED</button><br>
+</div>
+
+<div>
+    LED引脚状态 : <span id="LEDState">NA</span><br>
+</div>
+<br><br>
+
+<script>
+function sendData(led) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("LEDState").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "setLED?LEDstate="+led, true);
+  xhttp.send();
+}
+ 
+
+</script>
+</center>
+</body>
+</html>
